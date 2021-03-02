@@ -2,30 +2,12 @@
     "m_SelectedDeviceId": "466a7fb5",
     "m_SelectedPackage": {
         "deviceId": "466a7fb5",
-        "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 25614,
-        "exited": true
+        "name": "com.kogames.triggermaze",
+        "processId": 22254,
+        "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "466a7fb5",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 12707,
-            "exited": true
-        },
-        {
-            "deviceId": "466a7fb5",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 10192,
-            "exited": true
-        },
-        {
-            "deviceId": "466a7fb5",
-            "name": "com.DefaultCompany.com.unity.template.mobile2D",
-            "processId": 6372,
-            "exited": true
-        },
         {
             "deviceId": "466a7fb5",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
@@ -55,6 +37,18 @@
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 25614,
             "exited": true
+        },
+        {
+            "deviceId": "466a7fb5",
+            "name": "com.unity3d.mobileremote",
+            "processId": 16691,
+            "exited": true
+        },
+        {
+            "deviceId": "466a7fb5",
+            "name": "com.kogames.triggermaze",
+            "processId": 22254,
+            "exited": false
         }
     ],
     "m_Tags": {

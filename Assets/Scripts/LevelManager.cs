@@ -57,8 +57,11 @@ public class LevelManager : MonoBehaviour
             PlayerPrefs.SetInt("MapIndex", 0);
         else if ((20 <= saveIndex && saveIndex < 40) || totalStarCount <120)
             PlayerPrefs.SetInt("MapIndex", 1);
-        else if ((40 <= saveIndex && saveIndex <= 60) || totalStarCount<180)        // Yeni map ekleyince "<= 60" buradaki  "=" i kaldir 
+        else if ((40 <= saveIndex && saveIndex < 60) || totalStarCount<180)        
             PlayerPrefs.SetInt("MapIndex", 2);
+        else if ((60 <= saveIndex && saveIndex <= 80) || totalStarCount < 180)        // Yeni map ekleyince "<= 80" buradaki  "=" i kaldir 
+            PlayerPrefs.SetInt("MapIndex", 3);
+        // <------------------------------------------------------------------------------ YENI MAP EKLEYINCE BURAYI GUNCELLE
         else
             Debug.LogError("Bu Seviye Bulunmamaktadir");
 
@@ -69,24 +72,18 @@ public class LevelManager : MonoBehaviour
         {
             maps[i].transform.GetChild(4).GetComponent<Button>().interactable = false;
 
-            if (totalStarCount >= 60 * (i + 1))
+            if (totalStarCount >= 60 * (i + 1))                                            // totalStarCount 60 katlari(Burasi duzeltilebilir
             {
-                maps[i].transform.GetChild(4).GetComponent<Button>().interactable = true;
-                maps[i].transform.GetChild(4).GetChild(1).gameObject.SetActive(false);
+                maps[i].transform.GetChild(4).GetComponent<Button>().interactable = true;  //Next Button interactible
+                maps[i].transform.GetChild(4).GetChild(1).gameObject.SetActive(false);     //Next Button Lock Image
 
             }
 
             if (i == mapIndex)
-            {
                 maps[i].SetActive(true);   
-            }
-             
             else
                 maps[i].SetActive(false);
         }
-
-        
-
     }
 
     // Next Button OnClick
@@ -159,19 +156,17 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-
     private void InitStars()
     {
-        if (!PlayerPrefs.HasKey("Stars"))                   // Islemi bir kereye mahsus yaptirdik. Tam anlamadim sonra arastir !
+        if (!PlayerPrefs.HasKey("Stars"))                   // Islemi bir kereye mahsus yaptirdik
         {
-            for (int i = 0; i < 1000; i++)     // bu for dongusunu yuksek sayida dondur (ileride guncelleme yapabilmek icin)
+            for (int i = 0; i < 1000; i++)     // Bu for dongusunu yuksek sayida dondur (ileride guncelleme yapabilmek icin)
             {
                 starCountString += "0";
             }
             PlayerPrefs.SetString("Stars", starCountString);
         }
     }
-
 
     public void ActivateTheStars()
     {

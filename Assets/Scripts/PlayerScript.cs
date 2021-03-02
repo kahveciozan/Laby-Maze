@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
 
     /* --- Variables for Level --- */
     public int buildIndex;
-    private int levelCount = 60;    // <--------------------------------- WRITE HERE THE LEVEL COUNT AS MANUALLY
+    private int levelCount = 65;    // <--------------------------------- WRITE HERE THE LEVEL COUNT AS MANUALLY
 
     /* --- AudioSource Variables ---*/
     [SerializeField]
@@ -336,13 +336,16 @@ public class PlayerScript : MonoBehaviour
             canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
         if (buildIndex == 40 && totalStarCount < 120)
             canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        // <----------------------------------------------------------------------------------------- YENI HARITANIN SON BOLUMU ICIN BURAYA EKLEMEYI UNUTMA
 
     }
 
     IEnumerator PlayerDeadEffect()
     {
+        soundFx.volume = 1f;
         soundFx.clip = gameOverSound;
         soundFx.Play();
+
         particle.Play();
         sr.enabled = false;
         bc.enabled = false;
