@@ -145,7 +145,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    /*--------------------------------------------------------------------------------*/
+    // Banner Advertising 
     private void RequestBanner()
     {
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";                     // Banner !!!!!!!!!!!!!!!!!1
@@ -161,7 +161,7 @@ public class MainMenu : MonoBehaviour
         this.bannerView.LoadAd(request);
     }
 
-    /* -------------- Advertising Events ------------------- */
+    /* --- --- --- --- --- --- --- --- --- --- --- --- Advertising Events --- --- --- --- --- --- --- --- --- --- */
     public void HandleOnAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleAdLoaded event received");

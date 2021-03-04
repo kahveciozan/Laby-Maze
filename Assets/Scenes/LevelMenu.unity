@@ -7372,7 +7372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.54788184, g: 0, b: 0.6792453, a: 1}
+  m_Color: {r: 0.53333336, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11219,6 +11219,21 @@ MonoBehaviour:
   - {fileID: 97021071}
   - {fileID: 715616965}
   - {fileID: 368268068}
+  - {fileID: 779097938}
+  - {fileID: 1328244593}
+  - {fileID: 1119206311}
+  - {fileID: 1275673581}
+  - {fileID: 1269384893}
+  - {fileID: 1846314978}
+  - {fileID: 810118604}
+  - {fileID: 1715883849}
+  - {fileID: 1082749666}
+  - {fileID: 709369384}
+  - {fileID: 1719375214}
+  - {fileID: 986175855}
+  - {fileID: 1970534061}
+  - {fileID: 1187609811}
+  - {fileID: 1679469514}
   soundFX: {fileID: 436898131}
   selectLevelSound: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
   backSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}

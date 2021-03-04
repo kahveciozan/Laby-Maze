@@ -3,8 +3,8 @@
     "m_SelectedPackage": {
         "deviceId": "466a7fb5",
         "name": "com.kogames.triggermaze",
-        "processId": 22254,
-        "exited": false
+        "processId": 19141,
+        "exited": true
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -49,6 +49,18 @@
             "name": "com.kogames.triggermaze",
             "processId": 22254,
             "exited": false
+        },
+        {
+            "deviceId": "466a7fb5",
+            "name": "com.kogames.triggermaze",
+            "processId": 30449,
+            "exited": true
+        },
+        {
+            "deviceId": "466a7fb5",
+            "name": "com.kogames.triggermaze",
+            "processId": 19141,
+            "exited": true
         }
     ],
     "m_Tags": {

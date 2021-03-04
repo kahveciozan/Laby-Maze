@@ -11,8 +11,12 @@ public class MovingEnemy : MonoBehaviour
     [SerializeField]
     private float minX,maxX,minY,maxY;
 
+    private AudioSource soundFx;
+
     void Start()
     {
+        soundFx = GetComponent<AudioSource>();
+
         if (horizantalSpeed < 0)
             horizantalSpeed = -horizantalSpeed;
         if (verticalSpeed < 0)
@@ -38,4 +42,16 @@ public class MovingEnemy : MonoBehaviour
 
         transform.Translate(new Vector3(speedX * Time.deltaTime, speedY * Time.deltaTime, 0f));
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            soundFx.Play();
+        }
+    }
+
+
+
 }

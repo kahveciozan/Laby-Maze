@@ -18,13 +18,14 @@ public class PlayerScript : MonoBehaviour
 
     /* --- Variables for Level --- */
     public int buildIndex;
-    private int levelCount = 65;    // <--------------------------------- WRITE HERE THE LEVEL COUNT AS MANUALLY
+    private int levelCount = 80;    // <--------------------------------- WRITE HERE THE LEVEL COUNT AS MANUALLY
+    private bool lastLevelAndNotEnoughStar = false;
 
     /* --- AudioSource Variables ---*/
     [SerializeField]
     private AudioSource soundFx;
     [SerializeField]
-    private AudioClip stop, run, collectStar, buttonSound, gameOverSound;
+    private AudioClip stop, run, collectStar, buttonSound;
     private bool isMoveControl, isStopControl;
 
     /* ----- Star Variables ----- */
@@ -59,6 +60,7 @@ public class PlayerScript : MonoBehaviour
         SetPlayerColor();
     }
 
+    // Set Player Color , Particle Color and Trail Color
     private void SetPlayerColor()
     {
         string tempColor = PlayerPrefs.GetString("PlayerColor");
@@ -88,7 +90,7 @@ public class PlayerScript : MonoBehaviour
             case "Blue":
                 GetComponent<SpriteRenderer>().color = Color.blue;
                 GetComponentInChildren<TrailRenderer>().startColor = Color.blue;
-                
+                particle.startColor = Color.blue ;
                 break;
             case "Cyan":
                 GetComponent<SpriteRenderer>().color = Color.cyan;
@@ -218,6 +220,10 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isPlayerFinish)
+            return;
+
+
         if (collision.CompareTag("Win"))
         {
             SaveTheIndex();
@@ -254,15 +260,34 @@ public class PlayerScript : MonoBehaviour
         soundFx.clip = buttonSound;
         soundFx.Play();
 
-
         yield return new WaitForSeconds(0.2f);
 
-        if (buildIndex > levelCount)
+        /* --------------------- LAST LEVEL CONTROL -------------------------*/
+        int totalStarCount = TotalStarCount();
+        int mapCount = PlayerPrefs.GetInt("MapIndex");
+
+        Debug.Log("TOTAL STAR COUNT =" + totalStarCount);
+        Debug.Log("MAP COUNT =" + mapCount);
+
+        for (int i = 1; i <= (mapCount + 1); i++)
         {
-            SceneManager.LoadScene(1);                      // Go to Level Menu
+            if (buildIndex == 20*i && totalStarCount < 60 * i)
+            {
+                lastLevelAndNotEnoughStar = true;
+                break;
+            }
+                                                                         
+        }
+        /*---------------------------------------------------------------------*/
+
+        if (buildIndex > levelCount || lastLevelAndNotEnoughStar)
+        {
+            SceneManager.LoadScene("LevelMenu");                      // Go to Level Menu
+            
         }
         else
         {
+            Debug.Log("BURASI GIRMEMEMELI");
             SceneManager.LoadScene(buildIndex + 1);         // Go to next level
         }
     }
@@ -318,33 +343,17 @@ public class PlayerScript : MonoBehaviour
 
         for (int i = 0; i< toplananItem; i++)
         {
-            canvas.transform.GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(true);
+            canvas.transform.GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(true);        // Toplanan yildizlari aktif et
         }
 
 
-        canvas.transform.GetChild(0).gameObject.SetActive(true);
-
-        string totalStarCount_S = PlayerPrefs.GetString("Stars");
-        int totalStarCount=0;
-        for (int j = 0; j < levelCount; j++)
-        {
-            totalStarCount += int.Parse(totalStarCount_S.Substring(j, 1));
-        }
-
-        // Yeterli yildiz yok ise Next Button Active olmasin
-        if(buildIndex ==20 && totalStarCount<60)
-            canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
-        if (buildIndex == 40 && totalStarCount < 120)
-            canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
-        // <----------------------------------------------------------------------------------------- YENI HARITANIN SON BOLUMU ICIN BURAYA EKLEMEYI UNUTMA
+        canvas.transform.GetChild(0).gameObject.SetActive(true);                                    // PopUpMenu acar 
+        
 
     }
 
     IEnumerator PlayerDeadEffect()
     {
-        soundFx.volume = 1f;
-        soundFx.clip = gameOverSound;
-        soundFx.Play();
 
         particle.Play();
         sr.enabled = false;
@@ -352,5 +361,18 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector2(0.2f, 0.2f);
         trail.gameObject.SetActive(false);
         yield return new WaitForSeconds(particle.main.startLifetime.constantMax);
+    }
+
+    //Total Star Count Calculator Method
+    private int TotalStarCount()
+    {
+        string totalStarCount_S = PlayerPrefs.GetString("Stars");
+        int totalStarCount = 0;
+        for (int j = 0; j < levelCount; j++)
+        {
+            totalStarCount += int.Parse(totalStarCount_S.Substring(j, 1));
+        }
+
+        return totalStarCount;
     }
 }
