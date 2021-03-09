@@ -119,7 +119,8 @@ public class PlayerScript : MonoBehaviour
        
 
     }
-
+    
+    // Set LEvel Text Name
     private void SetTheTextName()
     {
         buildIndex = SceneManager.GetActiveScene().buildIndex;
@@ -239,6 +240,7 @@ public class PlayerScript : MonoBehaviour
             soundFx.clip = collectStar;
             soundFx.Play();
             collision.gameObject.SetActive(false);
+            SetCollectedStarImage();
         }
         if (collision.CompareTag("Enemy"))
         {
@@ -262,7 +264,7 @@ public class PlayerScript : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        /* --------------------- LAST LEVEL CONTROL -------------------------*/
+        /* --------------------- LAST LEVEL OF MAP CONTROL -------------------------*/
         int totalStarCount = TotalStarCount();
         int mapCount = PlayerPrefs.GetInt("MapIndex");
 
@@ -343,7 +345,7 @@ public class PlayerScript : MonoBehaviour
 
         for (int i = 0; i< toplananItem; i++)
         {
-            canvas.transform.GetChild(0).GetChild(0).GetChild(i).gameObject.SetActive(true);        // Toplanan yildizlari aktif et
+            canvas.transform.GetChild(0).GetChild(0).GetChild(i).GetComponent<Image>().color = new Color(255, 255, 255, 255);        // Toplanan yildizlari aktif et
         }
 
 
@@ -374,5 +376,15 @@ public class PlayerScript : MonoBehaviour
         }
 
         return totalStarCount;
+    }
+
+    //Activate the Collocted Star Image in Canvas ( Top-Left Star Images )
+    private void SetCollectedStarImage()
+    {
+        for(int i=0; i<toplananItem; i++)
+        {
+            canvas.transform.GetChild(1).GetChild(1).GetChild(i).GetComponent<Image>().color = new Color(255, 255, 255, 255);
+        }
+        
     }
 }

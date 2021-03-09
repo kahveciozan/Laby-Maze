@@ -31,7 +31,6 @@ public class LevelManager : MonoBehaviour
         InitMap();
         ActivateTheStars();
         LevelLockSystem();
-
     }
 
     // This method sets which map will load
@@ -59,7 +58,7 @@ public class LevelManager : MonoBehaviour
             PlayerPrefs.SetInt("MapIndex", 1);
         else if ((40 <= saveIndex && saveIndex < 60) || totalStarCount<180)        
             PlayerPrefs.SetInt("MapIndex", 2);
-        else if ((60 <= saveIndex && saveIndex <= 80) || totalStarCount < 180)        // Yeni map ekleyince "<= 80" buradaki  "=" i kaldir 
+        else if ((60 <= saveIndex && saveIndex <= 80) || totalStarCount < 180)        // Yeni map ekleyince "<= 80" buradaki  "="  kaldir 
             PlayerPrefs.SetInt("MapIndex", 3);
         // <------------------------------------------------------------------------------ YENI MAP EKLEYINCE BURAYI GUNCELLE
         else
@@ -127,7 +126,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    /* ----------------------- LevelSelect Button OnClick -----------------------------------*/
+    // LevelSelect Button OnClick 
     public void LevelSelect()
     {
         StartCoroutine(IELevelSelectSound());
@@ -142,7 +141,7 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(selectedLevel);
     }
 
-    /* ----------------- Return to Main Menu Button OnClick --------------------------------*/
+    // Return to Main Menu Button OnClick
     public void ReturnToMainMenu()
     {
         StartCoroutine(IEReturnToMainMenu());
