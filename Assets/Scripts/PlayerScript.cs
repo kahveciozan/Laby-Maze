@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class PlayerScript : MonoBehaviour
     private bool isMoveControl, isStopControl;
 
     /* ----- Star Variables ----- */
-    private int toplananItem;
+    public int toplananItem;
     private string orijinal;
 
     /* --- Pop Up Menu Variables --- */
@@ -41,6 +42,7 @@ public class PlayerScript : MonoBehaviour
     private BoxCollider2D bc;
     private TrailRenderer trail;
 
+    [System.Obsolete]
     void Start()
     {
         isMoveControl = false;  isStopControl = false;
@@ -51,7 +53,6 @@ public class PlayerScript : MonoBehaviour
         SetTheTextName();
 
         soundFx = GetComponent<AudioSource>();
-
         particle = GetComponentInChildren<ParticleSystem>();
         sr = GetComponent<SpriteRenderer>();
         bc = GetComponent<BoxCollider2D>();
@@ -61,6 +62,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Set Player Color , Particle Color and Trail Color
+    [System.Obsolete]
     private void SetPlayerColor()
     {
         string tempColor = PlayerPrefs.GetString("PlayerColor");
@@ -231,7 +233,7 @@ public class PlayerScript : MonoBehaviour
             isPlayerFinish = true;
             StartCoroutine(OpenPopUpMenu());
             //OpenPopUpMenu();
-            SetTheStars(buildIndex - 1);
+            SetTheStars();
             
         }
         if (collision.CompareTag("Star"))
@@ -246,7 +248,9 @@ public class PlayerScript : MonoBehaviour
         {
             StartCoroutine(PlayerDeadEffect());
             StartCoroutine(OpenPopUpMenu());
-            canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+            canvas.transform.GetChild(0).GetChild(5).gameObject.SetActive(false);                               // Deactivate NextButton
+            canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);                               // Deactivate RewardedAdButton
+            canvas.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = "TRY AGAIN";        // Change Text
 
         }
     }
@@ -268,9 +272,6 @@ public class PlayerScript : MonoBehaviour
         int totalStarCount = TotalStarCount();
         int mapCount = PlayerPrefs.GetInt("MapIndex");
 
-        Debug.Log("TOTAL STAR COUNT =" + totalStarCount);
-        Debug.Log("MAP COUNT =" + mapCount);
-
         for (int i = 1; i <= (mapCount + 1); i++)
         {
             if (buildIndex == 20*i && totalStarCount < 60 * i)
@@ -289,14 +290,16 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("BURASI GIRMEMEMELI");
-            SceneManager.LoadScene(buildIndex + 1);         // Go to next level
+            SceneManager.LoadScene(buildIndex + 1);                   // Go to next level
         }
     }
 
     // Canvas Button OnClick Play Again
     public void PlayAgain()
     {
+        FinishScript fs = GameObject.FindObjectOfType<FinishScript>();
+        fs.ShowInterstitial();
+
         StartCoroutine(IEPlayAgain());
     }
 
@@ -323,19 +326,20 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-    public void SetTheStars(int levelID)
+    public void SetTheStars()
     {
 
         orijinal = PlayerPrefs.GetString("Stars");
 
-        if (toplananItem > int.Parse(orijinal.Substring(levelID, 1)))
+        if (toplananItem > int.Parse(orijinal.Substring(buildIndex - 1, 1)))
         {
 
-            orijinal = orijinal.Remove(levelID, 1);
-            orijinal = orijinal.Insert(levelID, toplananItem.ToString());
+            orijinal = orijinal.Remove(buildIndex - 1, 1);
+            orijinal = orijinal.Insert(buildIndex - 1, toplananItem.ToString());
         }
 
         PlayerPrefs.SetString("Stars", orijinal);
+        ActivateCollectedStarts();
     }
 
     IEnumerator OpenPopUpMenu()
@@ -343,15 +347,23 @@ public class PlayerScript : MonoBehaviour
 
         yield return new WaitForSeconds(0.6f);
 
-        for (int i = 0; i< toplananItem; i++)
-        {
-            canvas.transform.GetChild(0).GetChild(0).GetChild(i).GetComponent<Image>().color = new Color(255, 255, 255, 255);        // Toplanan yildizlari aktif et
-        }
-
+        ActivateCollectedStarts();
 
         canvas.transform.GetChild(0).gameObject.SetActive(true);                                    // PopUpMenu acar 
-        
 
+    }
+
+    private void ActivateCollectedStarts()
+    {
+        for (int i = 0; i < toplananItem; i++)
+        {
+            canvas.transform.GetChild(0).GetChild(1).GetChild(i).GetComponent<Image>().color = new Color(255, 255, 255, 255);        // Toplanan yildizlari aktif et
+        }
+
+        if(toplananItem == 3)
+        {
+            canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);       // Rewarded ad pasit et
+        }
     }
 
     IEnumerator PlayerDeadEffect()

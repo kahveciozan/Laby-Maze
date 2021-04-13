@@ -5111,7 +5111,6 @@ MonoBehaviour:
   run: {fileID: 8300000, guid: 0994c12e202f342459a4212e7287f7e8, type: 3}
   collectStar: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
   buttonSound: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
-  gameOverSound: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
   canvas: {fileID: 0}
 --- !u!82 &7235362279756127005
 AudioSource:

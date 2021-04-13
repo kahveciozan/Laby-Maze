@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
     {
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(initStatus => { });
-        //this.RequestBanner();                                 //  *** ADVERTISING *** (Activate this line) 
+        this.RequestBanner();                                 //  *** ADVERTISING *** (Activate this line) 
 
 
         soundFX = GetComponent<AudioSource>();
@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour
     //Play Button OnClick (Go To Level Menu )
     public void GoToLevelMenu()
     {
-        //bannerView.Destroy();                             // *** ADVERTISING *** (Activate this line) 
+        bannerView.Destroy();                             // *** ADVERTISING *** (Activate this line) 
         StartCoroutine(IEGoToLevelMenu()); 
     }
 

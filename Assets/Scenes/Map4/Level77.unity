@@ -599,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 5626984998495439690, guid: 90c3fc9b9dcf69a48becade72da66649,
         type: 3}
       propertyPath: maxY
-      value: -0.22
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 5626984998495439690, guid: 90c3fc9b9dcf69a48becade72da66649,
         type: 3}

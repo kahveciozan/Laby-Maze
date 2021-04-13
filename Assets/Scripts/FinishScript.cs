@@ -21,7 +21,7 @@ public class FinishScript : MonoBehaviour
 
     private void Start()
     {
-        //RequestInterstitial();                                            // *** ADVERTISING *** (Activate this line) 
+        RequestInterstitial();                                            // *** ADVERTISING *** (Activate this line) 
         soundFX = GetComponent<AudioSource>();
         particle = GetComponentInChildren<ParticleSystem>();
         buildIndex = SceneManager.GetActiveScene().buildIndex;
@@ -35,7 +35,7 @@ public class FinishScript : MonoBehaviour
 
             if (buildIndex > 5)
             {
-                //StartCoroutine(ShowTheInterstitialAdvertising());     // *** ADVERTISING *** (Activate this line) 
+                StartCoroutine(ShowTheInterstitialAdvertising());     // *** ADVERTISING *** (Activate this line) 
             }
 
 
@@ -77,11 +77,20 @@ public class FinishScript : MonoBehaviour
     IEnumerator ShowTheInterstitialAdvertising()
     {
         yield return new WaitForSeconds(0.4f);
+        ShowInterstitial();
+    }
+
+
+    public void ShowInterstitial()
+    {
+
         if (this.interstitial.IsLoaded())
         {
             this.interstitial.Show();
         }
     }
+
+
 
     /* ------------------------------- Interstitial Advertisng Events ----------------------------------------------*/
     public void HandleOnAdLoaded(object sender, EventArgs args)

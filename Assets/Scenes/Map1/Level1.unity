@@ -5126,6 +5126,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3785389726320651373, guid: 093df84dc9b26f34f91ff086156e8215,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5597184004371314422, guid: 093df84dc9b26f34f91ff086156e8215,
         type: 3}
       propertyPath: m_LocalPosition.x

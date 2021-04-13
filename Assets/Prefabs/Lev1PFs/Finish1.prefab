@@ -1025,7 +1025,7 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 1
+      cycleCount: 5
       repeatInterval: 0.01
       probability: 1
   SizeModule:
@@ -4826,7 +4826,7 @@ GameObject:
   - component: {fileID: 6817331617612444560}
   - component: {fileID: 5445621763962872642}
   m_Layer: 0
-  m_Name: Finish
+  m_Name: Finish1
   m_TagString: Win
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5031,5 +5031,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32090120dad537649b328f12d7f4dc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGameObject: {fileID: 5169014086835332428, guid: 7aed14c41ff54834e99e66e00675dfaf,
-    type: 3}
